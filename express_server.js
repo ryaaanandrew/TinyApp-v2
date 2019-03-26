@@ -18,8 +18,13 @@ app.get('/urls.json', (req, res) => {
 });
 
 app.get('/urls', (req, res) => {
-    let templateVars = { urls: urlDatabase }
+    const templateVars = { urls: urlDatabase }
     res.render('urls_index', templateVars);
+});
+
+app.get('/urls/:shortURL', (req, res) => {
+    const templateVars = { shortURL: req.params.shortURL, longURL: urlDatabase[req.params.shortURL] }
+    res.render('urls_show', templateVars);
 });
 
 app.listen(PORT, () => {
